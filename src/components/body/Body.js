@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Body.css";
 import virtual from "./../images/desktop/image-interactive.jpg";
 import ImageContent from "./ImageContent";
+import gsap from "gsap";
 
 function Body() {
+  const box1 = useRef();
+  const box2 = useRef();
+
+  useEffect(() => {
+    const right = box1.current;
+    const left = box2.current;
+
+    gsap.to(right, { x: 100, repeat: 1, repeatDelay: 5 });
+  }, []);
+
+  const onEnter = (currentTarget) => {
+    gsap.to(currentTarget, { bacgroundColor: "red" });
+  };
+
   const imageDiv = ImageContent.map((item) => (
     <div key={item.id} className="single-img">
-      <img src={item.img} alt="images" />
-      <h3>{item.text}</h3>
+      <div
+        className="tiles"
+        style={{
+          backgroundImage: `url(${item.img})`,
+          minHeight: "350px",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        onMouseEnter={onEnter}
+      >
+        <h3>{item.text}</h3>
+      </div>
     </div>
   ));
 
@@ -15,7 +41,7 @@ function Body() {
     <div className="middle-content">
       <div className="first-content">
         <img src={virtual} alt="virtual" />
-        <div className="virtual-content">
+        <div className="virtual-content" ref={box1}>
           <h3>THE LEADER IN INTERACTIVE VR</h3>
           <p>
             Founded in 2011, Loopstudios has been producing world-class virtual

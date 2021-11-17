@@ -28,6 +28,7 @@ function Footer() {
             <img src={instagram} alt="instagram" className="icon" />
           </div>
           <p>&copy;Loopstudios. All rights reserved.</p>
+          <p>Challenge by: Frontend Mentor</p>
           <p>Curated by: Ephraim</p>
         </div>
       </div>
