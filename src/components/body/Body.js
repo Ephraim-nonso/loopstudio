@@ -12,12 +12,9 @@ function Body() {
     const right = box1.current;
     const left = box2.current;
 
-    gsap.to(right, { x: 100, repeat: 1, repeatDelay: 5 });
+    gsap.to(right, { x: 100, repeat: 1, repeatDelay: 3, yoyo: true });
+    gsap.to(left, { x: -150, repeat: 1, repeatDelay: 3, yoyo: true });
   }, []);
-
-  const onEnter = (currentTarget) => {
-    gsap.to(currentTarget, { bacgroundColor: "red" });
-  };
 
   const imageDiv = ImageContent.map((item) => (
     <div key={item.id} className="single-img">
@@ -25,12 +22,7 @@ function Body() {
         className="tiles"
         style={{
           backgroundImage: `url(${item.img})`,
-          minHeight: "350px",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
         }}
-        onMouseEnter={onEnter}
       >
         <h3>{item.text}</h3>
       </div>
@@ -40,7 +32,7 @@ function Body() {
   return (
     <div className="middle-content">
       <div className="first-content">
-        <img src={virtual} alt="virtual" />
+        <img src={virtual} alt="virtual" ref={box2} />
         <div className="virtual-content" ref={box1}>
           <h3>THE LEADER IN INTERACTIVE VR</h3>
           <p>
